@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    </head>
+        
+    <body>
+        <div class="container">
+        <div class="firstpagecontent">
+            <h4 style="text-align: center;">Speed Installation </h4>  
+            <div style="text-align: center;margin-left: 30%;">
+                  
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><label>Template Type :</label></td>  
+                                <td><select class="cmncls" id="templatetype" style="padding: 5px 10px">
+                                    <option value="">--select--</option>
+                                    <option value="A">Ashokleyland template</option>
+                                    <option value="M">Mahendra template</option>
+                                    <option value="T">Tata template</option>
+                                </select>
+                                </td>
+                    
+                        </tr>
+                        <tr>
+                            <td><label>Date:</label></td>
+                            <td><input type="text" class="txtDate cmncls" placeholder="DD/MM/YYYY"  onkeyup="changedate(this)"></td>    
+                        </tr>
+                        
+                        <tr>
+                            <td><label>Model Name:</label></td>
+                            <td><input type="text" class="txtModelname cmncls"></td>    
+                        </tr>
+                        <tr>
+                            <td><label>Chasis No:</label></td>
+                            <td><input type="text" class="txtChasisno cmncls"></td>    
+                        </tr>
+                        <tr>
+                            <td><label>Engine No:</label></td>
+                            <td><input type="text" class="txtEngineNo cmncls"></td>    
+                        </tr>
+                        <tr>
+                            <td><label>Customer Name :</label></td>
+                            <td><input type="text" class="txtCustomerName cmncls"></td>    
+                        </tr>
+                        <tr>
+                            <td><label>Address:</label></td>
+                            <td><textarea type="text" class="txtaddress cmncls"></textarea></td>    
+                        </tr>
+                        <tr>
+                            <td><label>ECU No:</label></td>
+                            <td><input type="text" class="txtECUNo cmncls" placeholder="EDC15C6790"></td>    
+                        </tr>
+                        <tr>
+                            <td><label>REG No:</label></td>
+                            <td><input type="text" class="txtREGNo cmncls"></td>    
+                        </tr>
+                        <tr>
+                            <td><label>Speed Limit Done On:</label></td>
+                            <td><input type="text" class="txtSpeed cmncls" placeholder="DD/MM/YYYY"></td>    
+                        </tr>
+                        <tr>
+                            <td><label>Date of Issue:</label></td>
+                            <td><input type="text" class="txtissuedDate cmncls" placeholder="DD/MM/YYYY"></td>    
+                        </tr>
+                    </tbody>
+                    </table>
+                    
+            </div>
+            <div style="margin-left: 37%;padding: 15px;"><button class="btn_preview" style="padding: 7px 7px;" onclick="Preview()">Preview</button>  
+                <button class="btn_Clear" style="padding: 7px 7px;margin-left: 5px;">Clear</button>
+            </div>
+        </div>
+       
+    <div id="preview">
+
+    </div>
+
+    </div>
+    </body>
+    <script>
+        $(document).ready(function(){
+            $(".btn_Clear").click(function(){
+            $('.cmncls').val('');
+            })
+        })
+
+        function changedate(arg){
+            $(".txtSpeed").val(arg.value);
+            $(".txtissuedDate ").val(arg.value);
+        }
+        function Preview(){
+                var template=$("#templatetype").val();
+                var Date=$(".txtDate").val();
+                var modalname=$(".txtModelname").val();
+                var chasisno=$(".txtChasisno").val();
+                var txtEngineNo=$(".txtEngineNo").val();
+                var CustomerName=$(".txtCustomerName").val();
+                var Address=$(".txtaddress").val();
+                var ecuno=$(".txtECUNo").val();
+                var regno=$(".txtREGNo").val();
+                var Speed=$(".txtSpeed").val();
+                var Issuedate=$(".txtissuedDate").val();
+                var flag=true;
+                $('.cmncls').each(function(){
+                    if($(this).val()==""){
+                    $(this).focus();
+                    flag=false;
+                    return false;
+                       }
+                })
+            if(flag==false){
+                return false;
+                }
+
+    
+        var bldr="";
+        bldr+='<div style="margin-left: 27%;"><button style="padding: 6px 15px;margin-left:10px;" id="btn_Print" onclick="print()">Print</button><button  style="padding: 6px 15px;margin-left:10px;"id="btn_back" onclick="download('+"'"+regno+"'"+')">Download</button><button  style="padding: 6px 15px;margin-left:10px;"id="btn_back" onclick="goback()">Back</button></div>';
+    if(template=="A"){    
+        bldr+='<div class="" id="dv_printContent"> ';
+        bldr+='<div style="color: #3c3b3c;width: 720px;height:auto ;position: relative;font-family: Arial, Helvetica, sans-serif;font-size: 9px;">'
+        bldr+='<img src="https://sriniwebdev.github.io/Demo/SpeedLimit/Img/Ashokleyland_template.jpg">';
+        bldr+='<div class="date" style="position: absolute;top: 112px;margin-left: 78px;"><h2>'+Date+'</h2></div>';
+        bldr+='<div class="modelname" style="position:absolute;top: 369px;margin-left: 293px;"><h2>'+modalname.toUpperCase()+'</h2></div>';
+        bldr+='<div class="chasisno" style="position:absolute;top: 399px;margin-left: 293px;"><h2>'+chasisno.toUpperCase()+'</h2></div>';
+        bldr+='<div class="chasisno" style="position:absolute;top: 428px;margin-left: 293px;"><h2>'+txtEngineNo.toUpperCase()+'</h2></div>';
+        bldr+='<div class="Adress" style="position:absolute;top: 459px;margin-left: 293px;"><h2>'+CustomerName.toUpperCase()+'&'+Address.toUpperCase()+'</h2></div>';
+        bldr+='<div class="ecuno" style="position:absolute;top: 490px;margin-left: 293px;"><h2>'+ecuno.toUpperCase()+'</h2></div>';
+        bldr+='<div class="regno" style="position:absolute;top: 521px;margin-left: 293px;"><h2>'+regno.toUpperCase()+'</h2></div>';
+        bldr+='<div class="date" style="position:absolute;top: 551px;margin-left: 293px;"><h2>'+Speed.toUpperCase()+'</h2></div>';
+        bldr+='<div class="date" style="position:absolute;top: 744px;margin-left: 169px;"><h2>'+Issuedate+'</h2></div>';
+        bldr+='</div>';
+        bldr+='</div>'; 
+        }
+        else if (template=="M") {
+
+bldr+='<div class="" id="dv_printContent"> ';
+        bldr+='<div style="color: #3c3b3c;width: 720px;height:auto ;position: relative;font-family: Arial, Helvetica, sans-serif;font-size: 11px;">'
+        bldr+='<img src="https://sriniwebdev.github.io/Demo/SpeedLimit/Img/Mahendra_template.jpg">';
+        bldr+='<div class="modelname" style="position:absolute;top: 679px;margin-left: 320px;"><h2>'+modalname.toUpperCase()+'</h2></div>';
+        bldr+='<div class="chasisno" style="position:absolute;top: 727px;margin-left: 320px;"><h2>'+chasisno.toUpperCase()+'</h2></div>';
+        bldr+='<div class="engineno" style="position:absolute;top: 774px;margin-left: 320px;"><h2>'+txtEngineNo.toUpperCase()+'</h2></div>';
+         bldr+='<div class="name" style="position:absolute;top: 821px;margin-left: 320px;"><h2>'+ CustomerName.toUpperCase()+'</h2></div>';
+        bldr+='<div class="Adress" style="position:absolute;top: 869px;margin-left: 320px;"><h2>'+Address.toUpperCase()+'</h2></div>';
+        bldr+='<div class="ecuno" style="position:absolute;top: 1055px;margin-left: 320px;"><h2>'+ecuno.toUpperCase()+'</h2></div>';
+        bldr+='<div class="regno" style="position:absolute;top: 1014px;margin-left: 320px;"><h2>'+regno.toUpperCase()+'</h2></div>';
+        bldr+='<div class="date" style="position:absolute;top: 1098px;margin-left: 320px;"><h2>'+Speed.toUpperCase()+'</h2></div>';
+        
+        bldr+='</div>';
+        bldr+='</div>';
+
+    }
+    $("#preview").html(bldr);
+    $(".firstpagecontent").hide();
+    
+    
+  }
+
+function goback(){
+    $(".firstpagecontent").show();
+    $("#preview").html('');
+}
+function print(){
+
+    var newWindow = window.open('', '', 'width=500, height=500'),
+document = newWindow.document.open(),
+pageContent =
+    '<!DOCTYPE html>' +
+    '<html>' +
+    '<head>' +
+    '<meta charset="utf-8" />' +
+    '<title>Inventory</title>' +
+    '<style type="text/css">body {-webkit-print-color-adjust: exact; font-family: Arial; }</style>' +
+    '</head>' +
+    '<body>'+$("#dv_printContent").html()+'</body></html>';
+document.write(pageContent);
+document.close();   
+
+setTimeout(function() {
+    newWindow.print();
+    newWindow.close();
+}, 250);
+  
+}
+window.jsPDF = window.jspdf.jsPDF;
+var docPDF = new jsPDF();
+function download(regno){
+var elementHTML = document.querySelector("#dv_printContent");
+docPDF.html(elementHTML, {
+ callback: function(docPDF) {
+  docPDF.save(regno+'.pdf');
+ },
+ x: 15,
+ y: 15,
+ width: 170,
+ windowWidth: 650
+});
+}
+
+    </script>           
+</html>
