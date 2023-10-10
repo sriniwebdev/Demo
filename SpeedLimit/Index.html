@@ -162,12 +162,26 @@ bldr+='<div class="" id="dv_printContent"> ';
         
         bldr+='</div>';
         bldr+='</div>';
-
+        
+    }
+    else if(template=="T"){
+        bldr+='<div class="" id="dv_printContent"> ';
+        bldr+='<div style="color: #3c3b3c;width: 720px;height:auto ;position: relative;font-family: Arial, Helvetica, sans-serif;font-size: 9px;">'
+        bldr+='<img src="https://sriniwebdev.github.io/Demo/SpeedLimit/Img/tata_template.jpg" width="724" height="1024">';
+        bldr+='<div class="modelname" style="position:absolute;top: 295px;margin-left: 213px;"><h2>'+modalname.toUpperCase()+'</h2></div>';
+        bldr+='<div class="invoiceno" style="position:absolute;top: 328px;margin-left: 213px;"><h2>11'+Math.random().toString().substr(2,4) +'</h2></div>';
+        bldr+='<div class="date" style="position:absolute;top: 360px;margin-left: 213px;"><h2>'+Date +'</h2></div>';
+        bldr+='<div class="chasisno" style="position:absolute;top: 392px;margin-left: 213px;"><h2>'+chasisno.toUpperCase()+'</h2></div>';
+        bldr+='<div class="engineno" style="position:absolute;top: 428px;margin-left: 213px;"><h2>'+txtEngineNo.toUpperCase()+'</h2></div>';
+        bldr+='<div class="regno" style="position:absolute;top: 465px;margin-left: 213px;"><h2>'+regno.toUpperCase()+'</h2></div>';
+        bldr+='<div class="ecuno" style="position:absolute;top: 502px;margin-left: 213px;"><h2>'+ecuno.toUpperCase()+'</h2></div>';
+        
+        bldr+='</div>';
+        bldr+='</div>';
     }
     $("#preview").html(bldr);
     $(".firstpagecontent").hide();
-    
-    
+
   }
 
 function goback(){
